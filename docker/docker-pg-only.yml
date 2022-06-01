@@ -1,0 +1,86 @@
+version: "3.7"
+
+services:
+
+  postgres-1:
+    image: postgresdb
+    container_name: pg-1
+    restart: always
+    volumes:
+      - test-data:/data
+      - pgvolume1:/var/lib/postgresql/
+    ports:
+      - 15432:5432
+
+  postgres-2:
+    image: postgresdb
+    container_name: pg-2
+    restart: always
+    volumes:
+      - test-data:/data
+      - pgvolume2:/var/lib/postgresql/
+    ports:
+      - 25432:5432
+
+  postgres-3:
+    image: postgresdb
+    container_name: pg-3
+    restart: always
+    volumes:
+      - test-data:/data
+      - pgvolume3:/var/lib/postgresql/
+    ports:
+      - 35432:5432
+
+  postgres-4:
+    image: postgresdb
+    container_name: pg-4
+    restart: always
+    volumes:
+      - test-data:/data
+      - pgvolume4:/var/lib/postgresql/
+    ports:
+      - 45432:5432
+
+  postgres-5:
+    image: postgresdb
+    container_name: pg-5
+    restart: always
+    volumes:
+      - test-data:/data
+      - pgvolume5:/var/lib/postgresql/
+    ports:
+      - 55432:5432
+
+  polydb:
+    image: polydb/polydb
+    container_name: polydb
+    restart: always
+    tty: true
+
+  exasol:
+    image: exasol/docker-db:latest
+    container_name: exa1
+    ports:
+      - 9563:8563
+      - 8899:8888
+      - 8081:80
+      - 6932:6932
+      - 2580:2580
+    privileged: true
+    volumes:
+      - test-data:/data
+
+
+volumes:
+  test-data:
+    external: true
+  pgvolume1:
+  pgvolume2:
+  pgvolume3:
+  pgvolume4:
+  pgvolume5:
+
+networks:
+  default:
+    name: polydb-net

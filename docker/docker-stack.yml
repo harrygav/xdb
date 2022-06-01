@@ -1,0 +1,167 @@
+version: "3.7"
+services:
+  postgres-1:
+    image: postgresdb
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - "node.hostname=={input_host}"
+    hostname: pg-1
+    volumes:
+      - pgvolume1:/var/lib/postgresql/
+      - test-data:/data
+      - type: tmpfs
+        target: /dev/shm
+        tmpfs:
+          size: 1600000000 # ~1.6gb
+    ports:
+      - 15432:5432
+
+  postgres-2:
+    image: postgresdb
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - "node.hostname=={input_host}"
+    hostname: pg-2
+    volumes:
+      - pgvolume2:/var/lib/postgresql/
+      - test-data:/data
+      - type: tmpfs
+        target: /dev/shm
+        tmpfs:
+          size: 1600000000 # ~1.6gb
+    ports:
+      - 25432:5432
+
+  postgres-3:
+    image: postgresdb
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - "node.hostname=={input_host}"
+    hostname: pg-3
+    volumes:
+      - pgvolume3:/var/lib/postgresql/
+      - test-data:/data
+      - type: tmpfs
+        target: /dev/shm
+        tmpfs:
+          size: 1600000000 # ~1.6gb
+    ports:
+      - 35432:5432
+
+  postgres-4:
+    image: postgresdb
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - "node.hostname=={input_host}"
+    hostname: pg-4
+    volumes:
+      - pgvolume4:/var/lib/postgresql/
+      - test-data:/data
+      - type: tmpfs
+        target: /dev/shm
+        tmpfs:
+          size: 1600000000 # ~1.6gb
+    ports:
+      - 45432:5432
+
+  postgres-5:
+    image: postgresdb
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - "node.hostname=={input_host}"
+    hostname: pg-5
+    volumes:
+      - pgvolume5:/var/lib/postgresql/
+      - test-data:/data
+      - type: tmpfs
+        target: /dev/shm
+        tmpfs:
+          size: 1600000000 # ~1.6gb
+    ports:
+      - 55432:5432
+
+  postgres-6:
+    image: postgresdb
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - "node.hostname=={input_host}"
+    hostname: pg-6
+    volumes:
+      - pgvolume6:/var/lib/postgresql/
+      - test-data:/data
+      - type: tmpfs
+        target: /dev/shm
+        tmpfs:
+          size: 1600000000 # ~1.6gb
+    ports:
+      - 65432:5432
+
+  postgres-7:
+    image: postgresdb
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - "node.hostname=={input_host}"
+    hostname: pg-7
+    volumes:
+      - pgvolume7:/var/lib/postgresql/
+      - test-data:/data
+      - type: tmpfs
+        target: /dev/shm
+        tmpfs:
+          size: 1600000000 # ~1.6gb
+    ports:
+      - 5437:5432
+
+  postgres-8:
+    image: postgresdb
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - "node.hostname=={input_host}"
+    hostname: pg-8
+    volumes:
+      - test-data:/data
+    ports:
+      - 5438:5432
+
+  polydb:
+    image: polydb
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - "node.hostname=={input_host}"
+    hostname: polydb
+    tty: true
+
+
+volumes:
+  pgvolume1:
+  pgvolume2:
+  pgvolume3:
+  pgvolume4:
+  pgvolume5:
+  pgvolume6:
+  pgvolume7:
+  test-data:
+    external: true
+networks:
+  default:
+    name: polydb-net
+    driver: overlay
+    attachable: true
